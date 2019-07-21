@@ -12,6 +12,8 @@ minus.addEventListener("click",function(){
 ```
 - react函数实现
 ```
+let number1=0
+let number2=0
 function App(){
   return (
     <div>
@@ -21,7 +23,6 @@ function App(){
   )
 }
 function Box1(obj){
-  let number1=0
   let add1=()=>{
     number1+=1
     render()
@@ -37,7 +38,6 @@ function Box1(obj){
      </div>
 }
 function Box2(){
-  let number2=0
   let add2=()=>{
     number2+=2
     render()
