@@ -119,3 +119,111 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<Baba />, rootElement);
 
 ```
+### React生命周期2
+```
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles.css";
+
+let div = document.createElement("div");
+document.body.appendChild(div);
+console.log = function(content) {
+  div.innerHTML += `${content}<br>`;
+};
+
+class Baba extends React.Component {
+  onClick() {
+    this.setState({
+      hasChild: false
+    });
+  }
+  callSon() {
+    this.setState({
+      word: "你还好吧"
+    });
+  }
+  constructor() {
+    super();
+    console.log(this.state);
+    this.state = {
+      hasChild: true
+    };
+    console.log(this.state);
+  }
+  render() {
+    return (
+      <div>
+        我是你爸爸
+        {this.state.hasChild ? <App word={this.state.word} /> : null}
+        <button onClick={() => this.onClick()}>kill son</button>
+        <button onClick={() => this.callSon()}>call son</button>
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  onClick() {
+    console.log("用户点击了");
+    this.setState({
+      n: this.state.n + 1
+    });
+  }
+  updateX() {
+    this.setState({
+      x: this.state.x + "!"
+    });
+  }
+  constructor() {
+    console.log("创建app");
+    super();
+    this.state = {
+      n: 0,
+      x: "不展示"
+    };
+  }
+  componentWillMount() {
+    console.log("将要mount App");
+  }
+  render() {
+    console.log("填充/更新 App的内容");
+    return (
+      <div className="App">
+        {this.state.n}
+        <br />
+        我爸说{this.props.word}
+        <br />
+        <button onClick={() => this.onClick()}>+1</button>
+        <button onClick={() => this.updateX()}>update x</button>
+      </div>
+    );
+  }
+  componentDidMount() {
+    console.log("mount App完毕");
+  }
+  componentWillUpdate() {
+    console.log("update App之前");
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("要不要更新呢");
+    if (this.state.n === nextState.n) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  componentDidUpdate() {
+    console.log("update App之后");
+  }
+  componentWillUnmount() {
+    console.log("App 快要死了，记得有事儿烧纸");
+  }
+  componentWillReceiveProps() {
+    console.log("我爸说话了");
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<Baba />, rootElement);
+
+```
