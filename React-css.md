@@ -37,5 +37,47 @@ export default function Topbar(props) {
   );
 }
 ```
+2. emotion方法
+```
+/** @jsx jsx */ 这一行不能省略
+import React from "react";
+import { jsx } from "@emotion/core";
+
+export default function X(props) {
+  const theme = props.theme;
+  return (
+    <div
+      css={{
+        display: "flex",
+        alignItems: "center",
+        background: theme,
+        padding: 10
+      }}
+    >
+      <div
+        css={{
+          display: "inline-block",
+          color: "red",
+          fontSize: 20,
+          white: 40,
+          height: 40,
+          background: "grey"
+        }}
+      >
+        logo
+      </div>
+      <nav
+        css={{
+          width: 200,
+          height: 30,
+          background: "#333",
+          marginLeft: 10
+        }}
+      />
+    </div>
+  );
+}
+
+```
 - 普通应用使用 styled-components 和 css modules，因为类名会变成随机字符串
 - 库使用传统 CSS 方式，因为类名不会变成随机字符串
